@@ -11,9 +11,9 @@ import static org.junit.Assert.assertTrue;
 @RunWith(Parameterized.class)
 public class LionSexNegativeTest {
     private final String sex;
-    private Feline feline;
+    private final Feline feline;
 
-    public LionSexNegativeTest(String sex) throws Exception {
+    public LionSexNegativeTest(String sex) {
         this.sex = sex;
         this.feline = new Feline();
     }
@@ -33,10 +33,8 @@ public class LionSexNegativeTest {
     }
 
     @Test
-    public void exceptionTextTest() throws Exception {
-        Exception exception = assertThrows(Exception.class, () -> {
-            new Lion(sex, feline);
-        });
+    public void exceptionTextTest() {
+        Exception exception = assertThrows(Exception.class, () -> new Lion(sex, feline));
         String expectedMessage = "Используйте допустимые значения пола животного - самец или самка";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
