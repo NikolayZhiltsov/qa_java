@@ -3,6 +3,7 @@ package com.example;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -10,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
@@ -62,6 +64,9 @@ public class FelineTest {
     @Test
     public void eatMeatSpyTest() throws Exception {
         feline.eatMeat();
-        Mockito.verify(feline, Mockito.times(1)).eatMeat();
+        ArgumentCaptor<Feline> argumentCaptor = ArgumentCaptor.forClass(Feline.class);
+        Mockito.verify(feline).getFood(String.valueOf(argumentCaptor.capture()));
+        String capturedArgument = String.valueOf((argumentCaptor.getValue()));
+        assertEquals("Хищник", capturedArgument);
     }
 }

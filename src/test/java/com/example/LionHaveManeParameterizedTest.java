@@ -30,7 +30,6 @@ public class LionHaveManeParameterizedTest {
 
     @Test
     public void haveManeTest() {
-
         assertEquals(expected, lion.doesHaveMane());
     }
 }
